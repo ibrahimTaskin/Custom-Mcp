@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mcp-weather-server:
+    build:
+      context: ./Custom-Mcp
+      dockerfile: Dockerfile
+    container_name: mcp-weather-server
+    stdin_open: true  # Keep STDIN open
+    tty: true         # Allocate a pseudo-TTY
+    volumes:
+      - ./logs:/app/logs
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+    # MCP servers don't expose ports, they use stdio
+    # ports: not needed for MCP servers 
