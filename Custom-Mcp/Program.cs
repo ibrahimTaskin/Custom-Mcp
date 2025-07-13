@@ -2,6 +2,10 @@
 using Microsoft.Extensions.Hosting;
 using ModelContextProtocol;
 using System.Net.Http.Headers;
+using DotNetEnv;
+
+// .env dosyasını yükle
+Env.Load();
 
 var builder = Host.CreateEmptyApplicationBuilder(settings: null);
 

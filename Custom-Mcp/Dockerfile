@@ -26,6 +26,6 @@ RUN dotnet publish "Custom-Mcp.csproj" -c Release -o /app/publish /p:UseAppHost=
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-
+COPY credentials/serviceAccount.json credentials/serviceAccount.json
 # MCP servers communicate via stdio, not HTTP
 ENTRYPOINT ["dotnet", "Custom-Mcp.dll"]
