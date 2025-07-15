@@ -1,17 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ModelContextProtocol;
 using System.Net.Http.Headers;
-using DotNetEnv;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using Custom_Mcp.Helpers;
 
-// .env dosyasını yükle
-Env.Load();
-
+// appsettings ve config ile ilgili kodları kaldır
 var builder = Host.CreateEmptyApplicationBuilder(settings: null);
-
-builder.Services.AddMcpServer()
-    .WithStdioServerTransport()
-    .WithToolsFromAssembly();
 
 builder.Services.AddSingleton(_ =>
 {
@@ -20,6 +15,9 @@ builder.Services.AddSingleton(_ =>
     return client;
 });
 
-var app = builder.Build();
+builder.Services.AddMcpServer()
+    .WithStdioServerTransport()
+    .WithToolsFromAssembly();
 
+var app = builder.Build();
 await app.RunAsync();

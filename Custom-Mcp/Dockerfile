@@ -27,5 +27,7 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 COPY credentials/serviceAccount.json credentials/serviceAccount.json
+COPY appsettings.json appsettings.json
+COPY appsettings.Development.json appsettings.Development.json
 # MCP servers communicate via stdio, not HTTP
 ENTRYPOINT ["dotnet", "Custom-Mcp.dll"]
